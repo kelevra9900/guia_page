@@ -6,9 +6,9 @@ import withAuth from '../components/withPrivateRoute';
 const Profile = () => {
   return (
     <div>
-      <p>PROFILE</p>
+      <ProfileContainer />
     </div>
   );
 };
 
-export default withAuth(Profile);
+export default Profile;

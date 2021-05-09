@@ -21,7 +21,7 @@
 // // // Example: input = #999 => output = 153, 153, 153
 // // // Example: input = 999 => output = 153, 153, 153
 // #############################
-const hexToRgb = (input: any) => {
+const hexToRgb = (input) => {
   input = input + '';
   input = input.replace('#', '');
   let hexRegex = /[0-9A-Fa-f]/g;

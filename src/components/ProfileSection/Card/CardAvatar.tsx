@@ -1,18 +1,13 @@
 import React from 'react';
-// nodejs library that concatenates classes
 import classNames from 'classnames';
-// nodejs library to set properties for components
 import PropTypes from 'prop-types';
-// @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
-// @material-ui/icons
-// core components
 
-import styles from './cardAvatar.style';
+import styles from '../styles/cardAvatarStyle';
 
 const useStyles = makeStyles(styles);
 
-export default function CardAvatar(props: any) {
+export default function CardAvatar(props:any) {
   const classes = useStyles();
   const { children, className, plain, profile, ...rest } = props;
   const cardAvatarClasses = classNames({
