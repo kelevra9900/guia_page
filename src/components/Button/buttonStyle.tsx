@@ -9,7 +9,7 @@ import {
   whiteColor,
   blackColor,
   hexToRgb,
-} from '../nextjs-material-dashboard';
+} from '../ProfileSection/nextjs-material-dashboard';
 import { createStyles } from '@material-ui/core/styles';
 
 const style = createStyles({

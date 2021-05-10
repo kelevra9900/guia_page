@@ -11,3 +11,6 @@ declare module '*.scss' {
 declare module '@styled-system/theme-get' {
   export function themeGet(path: string, fallback?: any): any;
 }
+declare module 'react-reveal' {
+  export const Fade: React.FC;
+}
