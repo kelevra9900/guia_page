@@ -1,13 +1,16 @@
 import React, { Fragment, useState } from 'react';
-const Fade = require('react-reveal/Fade');
+import Link from 'next/link';
+import { PayPalButton } from 'react-paypal-button-v2';
+
 import Select from 'react-select';
 import { InputLabel, Radio } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import makeAnimated from 'react-select/animated';
 import Dropzone from 'react-dropzone-uploader';
 import 'react-dropzone-uploader/dist/styles.css';
+const Fade = require('react-reveal/Fade');
 
-import { Box } from './profile.style';
+import { Box, PromoItem, ContainerButton } from './profile.style';
 import cobertura, { categorias, subCategories } from '../../data/';
 
 import Card from '../../components/ProfileSection/Card/Card';
@@ -18,6 +21,12 @@ import GridContainer from '../../components/ProfileSection/Grid/GridContainer';
 import GridItem from '../../components/ProfileSection/Grid/GridItem';
 import { IRegistro } from '../../interfaces/revista';
 import Button from '../../components/Button';
+import CardAvatar from '../../components/ProfileSection/Card/CardAvatar';
+//Assets
+import crown from '../../assets/images/crown.svg';
+import empty from '../../assets/images/empty_image.png';
+import Heading from '../../components/Heading';
+import Text from '../../components/Text';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,19 +52,18 @@ const ProfileContainer = () => {
     show: false,
   });
 
-
   //** Functions **//
   const showOptions = () => {
     profilesetstate((prevState) => ({
       ...profileState,
       show: !prevState.show,
     }));
-  }
+  };
 
-  const changeOptionRegister = (event:React.ChangeEvent<HTMLInputElement>) => {
+  const changeOptionRegister = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
     console.log('información del radio', selectedOption);
-  }
+  };
 
   return (
     <div className={classes.content}>
@@ -309,21 +317,100 @@ const ProfileContainer = () => {
                 <p>Prueba</p>
               </Fade>
 
-              <Button color="primary" onClick={showOptions} >Cambiar tipo de mención</Button>
+              <Button color="primary" onClick={showOptions}>
+                Cambiar tipo de mención
+              </Button>
             </CardBody>
-            {!profileState.show? (
+            {!profileState.show ? (
               <div></div>
             ) : (
               <Fragment>
-               <Fade>
-                <Box>
-                  <Radio checked={selectedOption === '1'} onChange={changeOptionRegister} value='1' name="option-register" inputProps={{'aria-label': '1'}} size="small" />
-                  <Radio checked={selectedOption === '2'} onChange={changeOptionRegister} value='2' name="option-register" inputProps={{'aria-label': '2'}} size="small" />
-                  <Radio checked={selectedOption === '3'} onChange={changeOptionRegister} value='3' name="option-register" inputProps={{'aria-label': '3'}} size="small" />
-                </Box>
+                <Fade>
+                  <Box>
+                    <Radio
+                      checked={selectedOption === '1'}
+                      onChange={changeOptionRegister}
+                      value="1"
+                      name="option-register"
+                      inputProps={{ 'aria-label': '1' }}
+                      size="small"
+                    />
+                    <Radio
+                      checked={selectedOption === '2'}
+                      onChange={changeOptionRegister}
+                      value="2"
+                      name="option-register"
+                      inputProps={{ 'aria-label': '2' }}
+                      size="small"
+                    />
+                    <Radio
+                      checked={selectedOption === '3'}
+                      onChange={changeOptionRegister}
+                      value="3"
+                      name="option-register"
+                      inputProps={{ 'aria-label': '3' }}
+                      size="small"
+                    />
+                  </Box>
 
-                <p>Vista previa</p>
-               </Fade>
+                  <p>Vista previa</p>
+                  <br></br>
+                  <PromoItem>
+                    <span className="tag">
+                      <img src={crown} alt="Sugerido" /> Sugerído
+                    </span>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <CardAvatar profile>
+                      <a href="#">
+                        <img src={empty} alt="logo_empresa" />
+                      </a>
+                    </CardAvatar>
+                    <br></br>
+                    <Heading as="h3" content="Nombre empresa" />
+                    <div className="line"></div>
+                    <p>Categoria</p>
+
+                    <div className="cardBody">
+                      <Text content="Descripción" />
+                    </div>
+                    <b>correo@correo</b>
+                    <div>
+                      <a>direccion</a>
+                    </div>
+                    <Link href="#">
+                      <a className="">
+                        <span className="arrow"></span>
+                        <span className="text">www.sitioweb.com</span>
+                      </a>
+                    </Link>
+
+                    <div>
+                      <p>Selecciona tu método de pago</p>
+                    </div>
+                  </PromoItem>
+                  <Fragment>
+                    <ContainerButton>
+                      <PayPalButton
+                        style={{
+                          layout: 'vertical',
+                          color: 'blue',
+                          shape: 'rect',
+                          label: 'paypal',
+                          tagline: false,
+                        }}
+                        amount="0.01"
+                        options={{
+                          clientId:
+                            // "AX60sotQhwHpPDAYdDfhoo5UyKpGAajfF5ixrQXW4tfveD49JTq6QXWYvJtZbwWPXbHyqeeoN7g-MvuN",
+                            'AX_AXIUPQeisxAtfFuwBqxNgxw7rd5WsnDvG7GKqkR7wheSuvf9WEyxwzV3EUMErCY6ABk7noTHUNsjn',
+                        }}
+                      />
+                    </ContainerButton>
+                  </Fragment>
+                </Fade>
               </Fragment>
             )}
           </Card>
