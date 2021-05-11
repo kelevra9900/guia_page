@@ -44,7 +44,7 @@ const ProfileContainer = () => {
   const animatedComponents = makeAnimated();
   const classes = useStyles();
 
-  const [state, setstate] = useState<IRegistro | null>();
+  const [state, setState] = useState<IRegistro | null>();
 
   const [selectedOption, setSelectedOption] = React.useState('1');
 
@@ -59,6 +59,20 @@ const ProfileContainer = () => {
       show: !prevState.show,
     }));
   };
+
+  // const handleSetData = (value:any, name:any) => {
+  //   setState({
+  //     ...state,
+  //     [name]: value,
+  //   });
+  // }
+
+  const handleSetData = (value:string, name:string) => {
+    const data = {
+      ...state,
+      [name]: value
+    }
+  }
 
   const changeOptionRegister = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);

@@ -10,6 +10,12 @@ module.exports = {
   },
 };
 
+module.exports = {
+  env: {
+    URL_API: process.env.URL_API
+  }
+}
+
 module.exports = withPlugins(
   [
     [
