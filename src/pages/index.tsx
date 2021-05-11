@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
-import Sticky from 'react-stickynode';
 import Head from '../containers/Head';
 
 import { globalTheme } from '../theme/';
@@ -9,6 +8,8 @@ import { GlobalStyle, Wrapper, ContentWrapper } from '../containers/Home/home.st
 import Header from '../components/Header';
 import Banner from '../containers/Banner';
 import CategorySection from '../containers/CategorySection';
+import Testimonials from '../containers/Testimonials';
+import Footer from '../containers/Footer';
 
 export default function Home() {
   return (
@@ -25,7 +26,9 @@ export default function Home() {
           <ContentWrapper>
             <Banner />
             <CategorySection />
+            <Testimonials />
           </ContentWrapper>
+          <Footer />
         </Wrapper>
       </Fragment>
     </ThemeProvider>

@@ -206,4 +206,164 @@ export const bannerData = {
   ]
 }
 
+/* ------------------------------------ */
+// Testimonial data
+/* ------------------------------------ */
+export const testimonialData = {
+  title: "Publicidad",
+  slogan: "",
+  reviews: [
+    {
+      id: 0,
+      name: "Johnson Controls",
+      designation: "Data information",
+      username: "@Johnson",
+      account_url: "#",
+      comment:
+        "Morbi congue justo non orci ultricies ullamcorper. Aliquam nec magna eros. Morbi sed neque porta ipsum pharetra luctus. Fusce et nisi aliquam, rhoncus lacus ac, vestibulum nisl.",
+      avatar:
+        "https://www.mundohvacr.com.mx/wp-content/uploads/2020/04/page600x400.png",
+    },
+    {
+      id: 1,
+      name: "Axis Comunucations",
+      designation: "Data information",
+      username: "@Axis",
+      account_url: "#",
+      comment:
+        "Morbi congue justo non orci ultricies ullamcorper. Aliquam nec magna eros. Morbi sed neque porta ipsum pharetra luctus. Fusce et nisi aliquam, rhoncus lacus ac, vestibulum nisl.",
+      avatar:
+        "https://01solutions.net/wp-content/uploads/2019/11/Axis-Communication-Zero-One-2.png",
+    },
+    {
+      id: 2,
+      name: "HID",
+      designation: "Data information",
+      username: "@HID",
+      account_url: "#",
+      comment:
+        "Morbi congue justo non orci ultricies ullamcorper. Aliquam nec magna eros. Morbi sed neque porta ipsum pharetra luctus. Fusce et nisi aliquam, rhoncus lacus ac, vestibulum nisl.",
+      avatar:
+        "https://circuitoscerrados.mx/wp-content/uploads/2019/12/HID-Logo.jpg",
+    },
+    {
+      id: 3,
+      name: "GSI",
+      designation: "Data information",
+      username: "@GSI",
+      account_url: "#",
+      comment:
+        "Morbi congue justo non orci ultricies ullamcorper. Aliquam nec magna eros. Morbi sed neque porta ipsum pharetra luctus. Fusce et nisi aliquam, rhoncus lacus ac, vestibulum nisl.",
+      avatar:
+        "https://gsiseguridad.es/wp-content/uploads/2017/08/logos-empresas-gsi-seguridad-privada-400x200.png",
+    },
+    {
+      id: 4,
+      name: "Coleman",
+      designation: "Data information",
+      username: "@coleman",
+      account_url: "#",
+      comment:
+        "Morbi congue justo non orci ultricies ullamcorper. Aliquam nec magna eros. Morbi sed neque porta ipsum pharetra luctus. Fusce et nisi aliquam, rhoncus lacus ac, vestibulum nisl.",
+      avatar:
+        "https://seguridadenamerica.com.mx/noticias/publicidad/28/logotipo/logo1.png",
+    },
+  ],
+};
+
+/* ------------------------------------ */
+// Footer data
+/* ------------------------------------ */
+import { Icon } from "react-icons-kit";
+import { facebook } from "react-icons-kit/fa/facebook";
+import { googlePlus } from "react-icons-kit/fa/googlePlus";
+import { twitter } from "react-icons-kit/fa/twitter";
+import logo from "../assets/images/logo.png";
+
+export const footerData = {
+  logo: logo,
+  mail: "soporte@seguridadenamerica.com.mx",
+  phone: "+55 5572 6005",
+  socialLinks: [
+    {
+      id: 1,
+      icon: <Icon icon={facebook} />,
+      name: "facebook",
+      link: "#",
+    },
+    {
+      id: 2,
+      icon: <Icon icon={googlePlus} />,
+      name: "googlePlus",
+      link: "#",
+    },
+    {
+      id: 3,
+      icon: <Icon icon={twitter} />,
+      name: "twitter",
+      link: "#",
+    },
+  ],
+  menuWidgets: [
+    {
+      id: 1,
+      title: "ACERCA DE NOSOTROS",
+      menu: [
+        {
+          id: 1,
+          text: "Soporte al cliente",
+          link: "#",
+        },
+        {
+          id: 2,
+          text: "Soporte técnico",
+          link: "#",
+        },
+        {
+          id: 3,
+          text: "Conócenos",
+          link: "#",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "NUESTRA INFORMACIÓN",
+      menu: [
+        {
+          id: 1,
+          text: "Póliticas de privacidad",
+          link: "/aviso",
+        },
+        {
+          id: 2,
+          text: "Términos y condiciones",
+          link: "#",
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "MI CUENTA",
+      menu: [
+        {
+          id: 1,
+          text: "Perfil",
+          link: "#",
+        },
+        {
+          id: 2,
+          text: "Permisos",
+          link: "#",
+        },
+        {
+          id: 3,
+          text: "Suscripciones",
+          link: "#",
+        },
+      ],
+    },
+  ],
+};
+
 export default cobertura;
