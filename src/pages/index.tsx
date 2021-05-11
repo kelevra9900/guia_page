@@ -7,6 +7,8 @@ import { globalTheme } from '../theme/';
 import { ResetCSS } from '../assets/css/CreateGlobalStyle';
 import { GlobalStyle, Wrapper, ContentWrapper } from '../containers/Home/home.style';
 import Header from '../components/Header';
+import Banner from '../containers/Banner';
+import CategorySection from '../containers/CategorySection';
 
 export default function Home() {
   return (
@@ -17,12 +19,12 @@ export default function Home() {
         <GlobalStyle />
 
         <Wrapper>
-            <Sticky top={0} innerZ={9999} activeClass="sticky-nav-active">
-              <Header />
-            </Sticky>
+          <Header />
+
           {/* Body  */}
           <ContentWrapper>
-
+            <Banner />
+            <CategorySection />
           </ContentWrapper>
         </Wrapper>
       </Fragment>

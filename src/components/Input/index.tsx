@@ -15,7 +15,8 @@ interface InputProps{
   passwordShowHide?: boolean,
   className?: any,
   data?: any,
-  required?: boolean
+  required?: boolean,
+  placeholder?: string
 }
 const Input = ({
     label,

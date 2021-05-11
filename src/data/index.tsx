@@ -169,4 +169,41 @@ export const subCategories = [
     { value: '127', label: 'Gabinetes, tableros y cajas para montaje de equipo', categoria: '21' },
 ]
 
+import slide1 from '../assets/images/slider/slide-1.png';
+import slide2 from '../assets/images/slider/slide-2.png';
+import slide3 from '../assets/images/slider/slide-3.png';
+import slide4 from '../assets/images/slider/slide-4.png';
+
+export const bannerData = {
+  title: 'GUÍA INTERNACIONAL DE SEGURIDAD',
+  description: "GUÍA INTERNACIONAL DE SEGURIDAD",
+  text: "Regístrate a nuestra Revista de seguridad",
+  carousel: [
+    {
+      id: 1,
+      thumb_url: slide1,
+      title: 'Johnson Controls',
+      link: '/empresas/195/AXIS Communications'
+    },
+    {
+      id: 2,
+      thumb_url: slide2,
+      title: 'HID',
+      link: '/empresas/803/HID Global'
+    },
+    {
+      id: 3,
+      thumb_url: slide3,
+      title: 'AXIS Communications',
+      link: '/empresas/195/AXIS Communication'
+    },
+    {
+      id: 4,
+      thumb_url: slide4,
+      title: 'GSI Seguridad privada',
+      link: '/empresas/164/GSI Seguridad privada'
+    }
+  ]
+}
+
 export default cobertura;

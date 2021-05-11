@@ -75,6 +75,11 @@ const useStyles = makeStyles((theme: Theme) =>
         display: 'none',
       },
     },
+    logoStyle:   {
+      display: 'block',
+      maxWidth: '20%',
+      height: 'auto',
+    },
   }),
 );
 
@@ -146,10 +151,11 @@ export default function Header() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" style={{background: '#0c386d'}}>
+      <AppBar position="fixed" style={{background: '#0c386d'}}>
         <Toolbar>
             {/* Logo aquí */}
-            <Logo title="logo" logoSrc={logo} />
+            {/* <Logo title="logo" logoSrc={logo} /> */}
+            <img src={logo} alt="logoSEA" className={classes.logoStyle}/>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
