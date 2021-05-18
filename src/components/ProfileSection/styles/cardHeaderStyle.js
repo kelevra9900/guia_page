@@ -11,10 +11,6 @@ import {
 } from '../nextjs-material-dashboard';
 import { createStyles } from '@material-ui/core/styles';
 
-export interface StylesDictionary{
-  [Key: string]: CSSProperties;
-}
-
 
 const style = createStyles({
   cardHeader: {

@@ -6,12 +6,20 @@ import styles from '../styles/cardHeaderStyle';
 
 const useStyles = makeStyles(styles);
 
-export default function CardHeader(props:any) {
+interface ICardHeader {
+  className: any,
+  children:any,
+  color: any,
+  plain:any,
+  stats: any,
+  icon: any
+}
+export default function CardHeader(props:ICardHeader) {
   const classes = useStyles();
   const { className, children, color, plain, stats, icon, ...rest } = props;
   const cardHeaderClasses = classNames({
     [classes.cardHeader]: true,
-    [classes[color + 'CardHeader']]: color,
+    // [classes[color + 'CardHeader']]: color,
     [classes.cardHeaderPlain]: plain,
     [classes.cardHeaderStats]: stats,
     [classes.cardHeaderIcon]: icon,

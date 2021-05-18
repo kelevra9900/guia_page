@@ -6,7 +6,7 @@ import map from '../../assets/images/map.png';
 const FooterWrapper = styled.footer`
   width: 100%;
   padding: 70px 0 40px;
-  background-color: ${themeGet('colors.heading', '#171717')};
+  background-color: ${themeGet('colors.heading', '#06111E')};
   background-image: url(${map});
   background-repeat: no-repeat;
   background-position: top center;
@@ -118,7 +118,7 @@ export const SocialList = styled.ul`
       }
 
       &:hover {
-        color: ${themeGet('colors.primary', '#FDEF00')};
+        color: ${themeGet('colors.primary', '#fff')};
       }
     }
   }

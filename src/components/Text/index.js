@@ -20,7 +20,7 @@ const TextWrapper = styled('p')(
   themed('Text')
 );
 
-const Text = ({ content, ...props }: any) => (
+const Text = ({ content, ...props }) => (
   <TextWrapper {...props}>{content}</TextWrapper>
 );
 

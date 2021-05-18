@@ -4,7 +4,7 @@ export default function HeadInfo(){
     return(
         <Head>
           <title>Guía de Seguridad</title>
-          <meta name="theme-color" content="#171717" />
+          <meta name="theme-color" content="#0d386c" />
           <meta name="description" content="Guía de Seguridad" />
           <meta
             name="keywords"

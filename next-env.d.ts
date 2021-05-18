@@ -14,3 +14,5 @@ declare module '@styled-system/theme-get' {
 declare module 'react-reveal' {
   export const Fade: React.FC;
 }
+
+declare module 'react-loadingg';

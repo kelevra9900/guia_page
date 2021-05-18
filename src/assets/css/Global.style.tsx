@@ -719,6 +719,10 @@ const CircleLoader = styled.div`
   width: 50px;
   height: 50px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   transform-origin: bottom center;
 
   .circle {
@@ -733,7 +737,7 @@ const CircleLoader = styled.div`
 
     &:nth-of-type(2) {
       animation-delay: 0.75s;
-      background-color: ${themeGet('colors.white', '#ffffff')};
+      background-color: ${themeGet('colors.yellow', '#F3C412')};
     }
   }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { } from 'next/router';
+import { useRouter } from "next/router";
+
 import Image from '../../components/Image';
 import Box from '../../components/Box';
 import Text from '../../components/Text';
@@ -8,7 +9,7 @@ import Heading from '../../components/Heading';
 import Container from '../../components/UI/Container';
 import CategorySectionWrapper from './category_section.style';
 import { useFetch } from '../../hooks/fetch';
-import { CircleLoader } from '../../assets/css/Global.style';
+import { BabelLoading } from 'react-loadingg';
 import FeatureBlock from '../../components/CategoryBlock';
 
 interface ICategorySection {
@@ -33,19 +34,15 @@ const CategorySection = ({
     contentStyle,
     blockWrapperStyle,
 }: ICategorySection) => {
-    const { loading, response } = useFetch('https://admin.guiainternacional.com/api/categorias');
+    const router = useRouter();
+    const { loading, response } = useFetch('http://127.0.0.1:8000/api/categorias');
 
+    const onClickCategory = (e:any, categoryID:number) => {
+      router.push(`/categoria/${categoryID}`);
+    };
     if(loading)
         return(
-            <CategorySectionWrapper>
-                <Container>
-                    <Text content="Cargando categorías" />
-                    <CircleLoader>
-                        <div className="circle"></div>
-                        <div className="circle"></div>
-                    </CircleLoader>
-                </Container>
-            </CategorySectionWrapper>
+          <BabelLoading />
         );
 
         return (
@@ -62,7 +59,7 @@ const CategorySection = ({
                   {response.data.map((feature:any, index:number) => (
                     <Box className="col" {...col} key={`feature-${index}`}>
                       <FeatureBlock
-                        onClick={(value:any) => console.log('value', value)}
+                        onClick={(value:any) => onClickCategory(value, feature.id)}
                         icon={
                           <Image
                           alt="logo-icono"
@@ -111,7 +108,7 @@ CategorySection.propTypes = {
       fontSize: "14px",
       letterSpacing: "0.15em",
       fontWeight: "700",
-      color: "#10ac84",
+      color: "#0f2137",
       mb: "10px",
     },
     // section title default style

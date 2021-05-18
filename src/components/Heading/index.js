@@ -20,7 +20,7 @@ const HeadingWrapper = styled('p')(
   themed('Heading')
 );
 
-const Heading = ({ content, ...props }: any) => (
+const Heading = ({ content, ...props }) => (
   <HeadingWrapper {...props}>{content}</HeadingWrapper>
 );
 

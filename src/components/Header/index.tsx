@@ -1,16 +1,24 @@
-import React from 'react';
-import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
+
+import {
+  fade,
+  makeStyles,
+  Theme,
+  createStyles,
+} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+
 import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import logo from '../../assets/images/site_logo_white.png';
-import Logo from '../UI/Logo';
+import Logo from '../../components/UI/Logo';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,12 +41,13 @@ const useStyles = makeStyles((theme: Theme) =>
       '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),
       },
-      marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: '100%',
+      margin: 'auto',
+      right: '0',
+      left: '0',
+      width: '50%',
       [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
+        marginLeft: theme.spacing(30),
+        width: '50%',
       },
     },
     searchIcon: {
@@ -60,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) =>
       transition: theme.transitions.create('width'),
       width: '100%',
       [theme.breakpoints.up('md')]: {
-        width: '20ch',
+        width: '55ch',
       },
     },
     sectionDesktop: {
@@ -75,25 +84,31 @@ const useStyles = makeStyles((theme: Theme) =>
         display: 'none',
       },
     },
-    logoStyle:   {
+    logoStyle: {
       display: 'block',
-      maxWidth: '20%',
+      maxWidth: '10%',
       height: 'auto',
     },
-  }),
+  })
 );
 
-export default function Header() {
+function Header({ logoStyle }: any) {
+  const router = useRouter();
+
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [
+    mobileMoreAnchorEl,
+    setMobileMoreAnchorEl,
+  ] = useState<null | HTMLElement>(null);
+  const [ query, setQuery ] = useState<string>('');
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleProfileMenuOpen = () => {
+  //   handle()
+  // };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -104,8 +119,20 @@ export default function Header() {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+  const handleMobileMenuOpen = () => {
+    // handleOpenModal()
+  };
+
+  const handleClickOpen = () => {
+    // setOpen(true);
+    router.push('/auth/login');
+  };
+
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    router.push({
+      pathname: `/busqueda/${query}`,
+    });
   };
 
   const menuId = 'primary-search-account-menu';
@@ -119,7 +146,6 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
       <MenuItem onClick={handleMenuClose}>Mi cuenta</MenuItem>
     </Menu>
   );
@@ -135,14 +161,15 @@ export default function Header() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleClickOpen}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          {/* <AccountCircle /> */}
+          <p>Acceso</p>
         </IconButton>
         <p>Perfil</p>
       </MenuItem>
@@ -151,24 +178,27 @@ export default function Header() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="fixed" style={{background: '#0c386d'}}>
+      <AppBar position="fixed" style={{ background: '#0c386d' }}>
         <Toolbar>
-            {/* Logo aquí */}
-            {/* <Logo title="logo" logoSrc={logo} /> */}
-            <img src={logo} alt="logoSEA" className={classes.logoStyle}/>
+          {/* Logo aquí */}
+          <Logo href="/" title="logo" logoSrc={logo} logoStyle={logoStyle} />
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <InputBase
-              placeholder="Buscar..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <form onSubmit={(e: any) => handleSearch(e)}>
+              <InputBase
+                onChange={(value) => setQuery(value.target.value)}
+                placeholder="Encuentra una empresa o servicio..."
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </form>
           </div>
+
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton
@@ -176,10 +206,13 @@ export default function Header() {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              onClick={handleClickOpen}
               color="inherit"
             >
-              <AccountCircle />
+              {/* <AccountCircle /> */}
+              <b style={{ color: '#fff', fontSize: '14px' }}>
+                Acceso a empresas
+              </b>
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
@@ -200,3 +233,16 @@ export default function Header() {
     </div>
   );
 }
+
+Header.propTypes = {
+  logoStyle: PropTypes.object,
+};
+
+Header.defaultProps = {
+  logoStyle: {
+    width: '178px',
+    mb: '150px',
+  },
+};
+
+export default Header;

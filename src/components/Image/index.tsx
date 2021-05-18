@@ -22,8 +22,8 @@ export default Image;
 Image.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
-  width: PropTypes.number,
-  height: PropTypes.number
+  width: PropTypes.any,
+  height: PropTypes.any
 };
 
 Image.defaultProps = {

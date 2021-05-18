@@ -11,7 +11,8 @@ interface LogoProps {
     withAchor?:any,
     anchorProps?:any,
     logoSrc?:any,
-    title: string
+    title: string,
+    href?:string
 }
 const Logo = ({
     logoWrapperStyle,
@@ -48,7 +49,7 @@ const Logo = ({
     logoSrc: PropTypes.string,
     title: PropTypes.string.isRequired,
     logoWrapperStyle: PropTypes.object,
-    logoStyle: PropTypes.object,
+    logoStyle: PropTypes.any,
     titleStyle: PropTypes.object,
     withAchor: PropTypes.bool,
     anchorProps: PropTypes.object,

@@ -2,13 +2,12 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import style from './buttonStyle';
 import { TypographyProps } from '@material-ui/core';
 
-const useStyles = makeStyles(style);
-
+const useStyles = makeStyles<Theme>(style);
 export default function RegularButton<C extends React.ElementType>(props: TypographyProps<C, {component?: C}>) {
   const classes = useStyles();
   const {
@@ -28,14 +27,14 @@ export default function RegularButton<C extends React.ElementType>(props: Typogr
   const btnClasses = classNames({
     [classes.button]: true,
     [classes[size]]: size,
-    [classes[color]]: color,
+    [classes[color as keyof Record<any, any>]]: color,
     [classes.round]: round,
     [classes.disabled]: disabled,
     [classes.simple]: simple,
     [classes.block]: block,
     [classes.link]: link,
     [classes.justIcon]: justIcon,
-    [className]: className,
+    [className as keyof Record<any, any>]: className,
   });
   return (
     <Button {...rest} classes={muiClasses} className={btnClasses}>

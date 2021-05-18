@@ -9,7 +9,7 @@ const LinkWrapper = styled('a')(
   themed('Link')
 );
 
-const Link = ({ children, ...props }: any) => (
+const Link = ({ children, ...props }) => (
   <LinkWrapper {...props}>{children}</LinkWrapper>
 );
 

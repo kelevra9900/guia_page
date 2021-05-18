@@ -276,8 +276,9 @@ export const testimonialData = {
 /* ------------------------------------ */
 import { Icon } from "react-icons-kit";
 import { facebook } from "react-icons-kit/fa/facebook";
-import { googlePlus } from "react-icons-kit/fa/googlePlus";
 import { twitter } from "react-icons-kit/fa/twitter";
+import { linkedin } from "react-icons-kit/fa/linkedin";
+
 import logo from "../assets/images/logo.png";
 
 export const footerData = {
@@ -287,19 +288,19 @@ export const footerData = {
   socialLinks: [
     {
       id: 1,
-      icon: <Icon icon={facebook} />,
+      icon: <Icon icon={facebook} style={{color: '#d1d1d1'}}/>,
       name: "facebook",
       link: "#",
     },
     {
       id: 2,
-      icon: <Icon icon={googlePlus} />,
-      name: "googlePlus",
+      icon: <Icon icon={linkedin} style={{color: '#d1d1d1'}} />,
+      name: "linkedin",
       link: "#",
     },
     {
       id: 3,
-      icon: <Icon icon={twitter} />,
+      icon: <Icon icon={twitter} style={{color: '#d1d1d1'}} />,
       name: "twitter",
       link: "#",
     },

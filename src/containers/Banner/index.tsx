@@ -54,7 +54,8 @@ const Banner = () => {
             <strong style={{ color: '#fff' }}>TOP</strong>GUÍA INTERNACIONAL DE
             SEGURIDAD
           </HighlightedText>
-          <Heading as="h1" content="Seguridad en américa" />
+          <Heading as="h1" content="GUÍA INTERNACIONAL DE SEGURIDAD" />
+          <p style={{color: '#fff'}}>Regístrate a nuestra Revista de seguridad</p>
           <FormWrapper>
             <Input
               className="valid"
@@ -88,7 +89,10 @@ const Banner = () => {
               <Fragment>
                 {carousel.map((item) => (
                   <GlideSlide key={`carousel_key${item.id}`}>
-                    <Link href={item.link}>
+                    <Link href={{
+                      pathname: '/empresas/[id]/[empresa]',
+                      query: {id: 195, empresa: 'AXIS'}
+                    }}>
                       <a className="item_wrapper">
                         <Image src={item.thumb_url} alt={item.title} />
                         <Heading as="h4" content={item.title} />
