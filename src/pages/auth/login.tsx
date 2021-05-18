@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import LoginModal from '../../components/LoginModal';
+import Head from '../../containers/Head';
 
 
 const LoginAuth = () => {
     return(
-        <LoginModal />
+        <Fragment>
+            <Head />
+            <LoginModal />
+        </Fragment>
     );
 }
 

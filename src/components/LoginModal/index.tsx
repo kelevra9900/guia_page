@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from "next/router";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,11 +8,15 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
+import { Alert } from '@material-ui/lab';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { BabelLoading } from 'react-loadingg';
+
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +47,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginModal() {
+  const router = useRouter();
   const classes = useStyles();
+  const [ errorState , setErrorState] = useState(false)
+  const [ loading, setLoading ] = useState(false);
+
+  const handleForm = async (event:any) => {
+    setErrorState(false);
+    setLoading(true);
+    event.preventDefault()
+    const username = event.target.email.value;
+    const pass = event.target.password.value
+    try{
+      const res = await axios.post('https://admin.guiainternacional.com/api/login', {
+        username: username,
+        password: pass
+      })
+      
+      if(res.data.message === 200){
+        localStorage.setItem("usuario", JSON.stringify(res.data.data));
+        router.push("/profile");
+        setLoading(false)
+      }
+    }catch(e:any){
+      setErrorState(true);
+      setLoading(false)
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs" className={classes.root}>
@@ -54,7 +85,7 @@ export default function LoginModal() {
         <Typography component="h1" variant="h5">
           Iniciar sesión
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleForm} method="POST">
           <TextField
             variant="outlined"
             margin="normal"
@@ -76,6 +107,7 @@ export default function LoginModal() {
             label="Contraseña"
             type="password"
             id="password"
+            
             autoComplete="current-password"
             style={{color: '#0d386c'}}
           />
@@ -83,6 +115,14 @@ export default function LoginModal() {
             control={<Checkbox value="remember" style={{color: '#0d386c'}} />}
             label="Recordar navegador"
           />
+
+          {
+            errorState && (
+              <Alert severity="error">Por favor ingresa de nuevo tus credenciales!</Alert>
+            )
+          }
+         
+
           <Button
             type="submit"
             fullWidth
@@ -90,7 +130,10 @@ export default function LoginModal() {
             style={{backgroundColor: '#0d386c', color: '#ffff'}}
             className={classes.submit}
           >
-            Iniciar sesión
+            {loading && (
+              <BabelLoading color={'#ffff'} />
+            )}
+            Iniciar sesión 
           </Button>
           <Grid container>
             <Grid item xs>

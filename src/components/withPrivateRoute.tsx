@@ -6,9 +6,9 @@ const withAuth = (WrappedComponent: any) => {
         if(typeof window !== 'undefined'){
             const Router = useRouter();
 
-            const token = localStorage.getItem('token');
+            const usuario = localStorage.getItem('usuario');
 
-            if(!token){
+            if(!usuario){
                 Router.replace("/");
                 return null;
             }

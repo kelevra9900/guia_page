@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
@@ -102,13 +102,21 @@ function Header({ logoStyle }: any) {
     setMobileMoreAnchorEl,
   ] = useState<null | HTMLElement>(null);
   const [ query, setQuery ] = useState<string>('');
+  //STATE si el usuario ha iniciado sesión
+  const [ isLoggedIn, setLogin ] = useState(false);
+  const [ userLoggedIn, setUser ] = useState();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  // const handleProfileMenuOpen = () => {
-  //   handle()
-  // };
+  useEffect(() => {
+    const usuario = localStorage.getItem('usuario');
+    if(usuario){
+      const user = JSON.parse(usuario);
+      setLogin(true);
+      setUser(user);
+    }
+  }, [])
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -125,7 +133,11 @@ function Header({ logoStyle }: any) {
 
   const handleClickOpen = () => {
     // setOpen(true);
-    router.push('/auth/login');
+    if(isLoggedIn){
+      router.push('/profile');
+    }else{
+      router.push('/auth/login');
+    }
   };
 
   const handleSearch = (e: any) => {
@@ -210,9 +222,16 @@ function Header({ logoStyle }: any) {
               color="inherit"
             >
               {/* <AccountCircle /> */}
-              <b style={{ color: '#fff', fontSize: '14px' }}>
-                Acceso a empresas
-              </b>
+              {isLoggedIn ? (
+                <b style={{ color: '#fff', fontSize: '14px' }}>
+                Mi cuenta
+                </b>
+              ) : (
+                <b style={{ color: '#fff', fontSize: '14px' }}>
+                  Acceso a empresas
+                </b>
+              )}
+              
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>

@@ -63,7 +63,7 @@ const InfoShowcase = ({
     const { id } = router.query;
     useEffect(() => {
       axios
-        .get(`http://127.0.0.1:8000/api/guia/${id}`)
+        .get(`https://admin.guiainternacional.com/api/guia/${id}`)
         .then((res: any) => {
           setData(res.data.data);
         })

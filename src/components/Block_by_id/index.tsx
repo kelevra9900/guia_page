@@ -90,16 +90,16 @@ const useStyles = makeStyles((theme: Theme) =>
 function Block (){
   const router = useRouter();
   const { id } = router.query;
-  if(id === undefined){
-    router.push('/');
-  }
+  // if(id === undefined){
+  //   router.push('/');
+  // }
   const [data, setData] = useState<any>([]);
   const [ loading, setLoading ] = useState<boolean>(true);
 
   const classes = useStyles();
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/search/${id}`)
+      .get(`https://admin.guiainternacional.com/api/search/${id}`)
       .then((res: any) => {
         const cat = res.data;
         setData(cat);
@@ -108,7 +108,7 @@ function Block (){
       .catch((error) => {
         return null;
       });
-  }, [router.query.id]);
+  }, []);
 
   const [state, setState] = React.useState({
     Local: false,
@@ -126,7 +126,7 @@ function Block (){
       setLoading(true);
       filter(event.target.name);
     }else{
-      axios.get(`http://127.0.0.1:8000/api/search/${id}`).then((res:any) => {
+      axios.get(`https://admin.guiainternacional.com/api/search/${id}`).then((res:any) => {
         const response = res.data;
         setData(response);
       });
@@ -138,7 +138,7 @@ function Block (){
 
   const filter = (params:string) => {
     
-    axios.get(`http://127.0.0.1:8000/api/search/${id}?cobertura_mercado=${params}`).then((res:any) => {
+    axios.get(`https://admin.guiainternacional.com/api/search/${id}?cobertura_mercado=${params}`).then((res:any) => {
       const response = res.data;
       setData(response);
       setLoading(false);

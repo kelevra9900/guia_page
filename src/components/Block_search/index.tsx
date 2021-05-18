@@ -109,7 +109,7 @@ function BlockSearch (){
 
     useEffect(() => {
         axios
-        .get(`http://127.0.0.1:8000/api/busqueda/${busqueda}`)
+        .get(`https://admin.guiainternacional.com/api/busqueda/${busqueda}`)
         .then((res: any) => {
             setState(res.data);
             setLoading(false);
@@ -127,7 +127,7 @@ function BlockSearch (){
           setLoading(true);
           filter(event.target.name);
         }else{
-          axios.get(`http://127.0.0.1:8000/api/busqueda/${busqueda}`).then((res:any) => {
+          axios.get(`https://admin.guiainternacional.com/api/busqueda/${busqueda}`).then((res:any) => {
             const response = res.data;
             setState(response);
           });
@@ -138,7 +138,7 @@ function BlockSearch (){
 
   const filter = (params:string) => {
     
-    axios.get(`http://127.0.0.1:8000/api/busqueda/${busqueda}?cobertura_mercado=${params}`).then((res:any) => {
+    axios.get(`https://admin.guiainternacional.com/api/busqueda/${busqueda}?cobertura_mercado=${params}`).then((res:any) => {
       const response = res.data;
       setState(response);
       setLoading(false);

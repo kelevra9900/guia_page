@@ -35,7 +35,7 @@ const CategorySection = ({
     blockWrapperStyle,
 }: ICategorySection) => {
     const router = useRouter();
-    const { loading, response } = useFetch('http://127.0.0.1:8000/api/categorias');
+    const { loading, response } = useFetch('https://admin.guiainternacional.com/api/categorias');
 
     const onClickCategory = (e:any, categoryID:number) => {
       router.push(`/categoria/${categoryID}`);
