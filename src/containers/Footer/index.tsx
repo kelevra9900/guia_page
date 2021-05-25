@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Box from '../../components/Box';
-import Text from '../../components/Text';
-import Heading from '../../components/Heading';
-import Container from '../../components/UI/Container';
+import Box from '@components/Box';
+import Text from '@components/Text';
+import Heading from '@components/Heading';
+import Container from '@components/UI/Container';
 import FooterWrapper, {
   CurvIcon,
   List,

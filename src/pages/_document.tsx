@@ -2,7 +2,7 @@ import React from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components'
 import { ServerStyleSheets } from '@material-ui/styles';
-import FavIcon from "../assets/images/favicon.png";
+import FavIcon from "@assets/images/favicon.png";
 
 class MyDocument extends Document {
   static async getInitialProps (ctx:any) {

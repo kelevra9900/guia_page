@@ -11,7 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { Box, Radio, RadioGroup } from '@material-ui/core';
+import { Box} from '@material-ui/core';
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -25,7 +25,7 @@ import makeAnimated from 'react-select/animated';
 
 import { BabelLoading } from 'react-loadingg';
 
-import { categorias, subCategories } from '../../data/';
+import { categorias, subCategories, paises, estados } from '../../data/';
 import axios from 'axios';
 
 function BlockSearch (){
@@ -135,15 +135,72 @@ function BlockSearch (){
       };
 
   //Cobertura petición
-
   const filter = (params:string) => {
-    
     axios.get(`https://admin.guiainternacional.com/api/busqueda/${busqueda}?cobertura_mercado=${params}`).then((res:any) => {
       const response = res.data;
       setState(response);
       setLoading(false);
     });
   }
+
+  // Cambio por país
+  const handleSelectChangeCountry = (inputValue:any) => {
+    const filterArray= state.filter((pais:any)=>pais.pais_empresa === inputValue.label);
+    if(filterArray.length > 0){
+      setState(filterArray)
+    }else{
+      axios.get(`https://admin.guiainternacional.com/api/busqueda/${busqueda}`).then((res:any) => {
+        const response = res.data;
+        setState(response);
+      });
+    }
+  }
+
+  //Cambio por estado
+  const handleSelectChangeState = (inputValue:any) => {
+    const filterArray= state.filter((pais:any)=>pais.estado === inputValue.label);
+    if(filterArray.length > 0){
+      setState(filterArray)
+    }else{
+      axios.get(`https://admin.guiainternacional.com/api/busqueda/${busqueda}`).then((res:any) => {
+        const response = res.data;
+        setState(response);
+      });
+    }
+  }
+
+  const handleSelectChangeCategorie = (inputValue:any) => {
+    if(inputValue.length > 0){
+      axios.get(`https://admin.guiainternacional.com/api/search/${inputValue[0].id}`).then((res:any) => {
+        const response = res.data;
+        setState(response);
+      });
+    }else{
+      axios.get(`https://admin.guiainternacional.com/api/busqueda/${busqueda}`).then((res:any) => {
+        const response = res.data;
+        setState(response);
+      });
+    }
+  }
+
+  const handleSelectChangeSubcategorie = (inputValue:any) => {
+    console.log('INFO', inputValue)
+    if(inputValue.id != null){
+      axios.get(`https://admin.guiainternacional.com/api/query/${inputValue.id}`).then((res:any) => {
+        console.log('DATA RESPONSE', res);
+        const response = res.data;
+        setState(response);
+      });
+    }else{
+      axios.get(`https://admin.guiainternacional.com/api/busqueda/${busqueda}`).then((res:any) => {
+        const response = res.data;
+        setState(response);
+      });
+    }
+  }
+
+
+
   const { Local, Nacional, Internacional } = cobertura;
 
   return (
@@ -155,11 +212,11 @@ function BlockSearch (){
             closeMenuOnSelect={false}
             components={animatedComponents}
             placeholder="Selecciona una categoría"
-            
+            onChange={handleSelectChangeCategorie}
             isMulti
           />
         <br></br>
-            <Select options={subCategories} placeholder="Subcategoría" />
+            <Select options={subCategories} placeholder="Subcategoría" onChange={handleSelectChangeSubcategorie} />
           <br></br>
 
           <div>
@@ -202,26 +259,23 @@ function BlockSearch (){
               </FormGroup>
             </FormControl>
           </div>
-          <br></br>
-          <div>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Ordenar por:</FormLabel>
-              <RadioGroup
-                aria-label="Fecha: más reciente"
-                name="gender1"
-              >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio style={{color: '#0D386C'}}/>}
-                  label="Fecha: más reciente"
-                />
-                <FormControlLabel
-                  value="male"
-                  control={<Radio style={{color: '#0D386C'}}/>}
-                  label="Fecha: más antiguo"
-                />
-              </RadioGroup>
-            </FormControl>
+
+          <div style={{marginTop: '18px'}}>
+          <Select
+            placeholder="Pais" 
+            options={paises}
+            components={animatedComponents}
+            onChange={handleSelectChangeCountry}
+          />
+          </div>
+          
+          <div style={{marginTop: '18px'}}>
+          <Select
+            placeholder="Estado" 
+            onChange={handleSelectChangeState}
+            options={estados}
+            components={animatedComponents}
+          />
           </div>
         </Grid>
 

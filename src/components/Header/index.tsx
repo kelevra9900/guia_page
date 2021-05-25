@@ -17,8 +17,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import logo from '../../assets/images/site_logo_white.png';
-import Logo from '../../components/UI/Logo';
+import logo from '@assets/images/site_logo_white.png';
+import Logo from '@components/UI/Logo';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

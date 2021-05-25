@@ -3,25 +3,21 @@ import { useRouter } from "next/router";
 import axios from 'axios';
 import PropTypes from "prop-types";
 import Link from "next/link";
-import Box from '../../components/Box';
-import Text from '../../components/Text';
-import Heading from '../../components/Heading';
-import Image from '../../components/Image';
-import Container from '../../components/UI/Container';
-import SugeridosCarousel from '../../components/Slider';
-import Reviewer1 from "../../assets/images/example-2.jpg";
+import Box from '@components/Box';
+import Text from '@components/Text';
+import Heading from '@components/Heading';
+import Image from '@components/Image';
+import Container from '@components/UI/Container';
+import SugeridosCarousel from '@components/Slider';
+import Reviewer1 from "@assets/images/example-2.jpg";
 
 import {
     EnterpriseShowcaseWrapper,
     EnterpriseShowcaseItem,
     EnterpriseLink,
-    ContenedorLoading,
     EnterpriseMeta,
     MetaItem,
 } from './enterprice_show_case.style';
-import { useFetch } from "../../hooks/fetch";
-import { BabelLoading } from 'react-loadingg';
-
 interface IRegistro{
   autorizado: number,
   cobertura_mercado: string,

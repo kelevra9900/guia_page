@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+      "baseUrl": ".",
       "target": "es6",
       "lib": [
         "dom",
@@ -19,7 +20,12 @@
       "jsx": "preserve",
       "noImplicitAny": true,
       "noImplicitThis": true,
-      "strictNullChecks": true
+      "strictNullChecks": true,
+      "paths": {
+        "@containers/*": ["./src/containers/*"],
+        "@components/*": ["./src/components/*"],
+        "@assets/*": ["./src/assets/*"],
+      },
     },
     "include": [
       "next-env.d.ts",

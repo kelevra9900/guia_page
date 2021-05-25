@@ -21,7 +21,7 @@ export const PromoItem = styled.div`
   width: calc(100% / 2 - 25px);
   max-width: 340px;
   min-width: 250px;
-  min-height: 250px;
+  min-height: 360px;
   padding: 20px;
   margin: 0 auto;
   height: calc(100% / 2 - 20px);

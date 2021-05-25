@@ -280,7 +280,7 @@ function Block (){
                       openWeb(result.sitio_web);
                     }}
                   >
-                    Sitio web
+                    Conócenos
                   </Button>
                 </CardActions>
               </Card>

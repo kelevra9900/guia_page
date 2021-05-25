@@ -1,13 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Link from 'next/link';
-import Heading from '../../components/Heading';
-import Text from '../../components/Text';
-import Image from '../../components/Image';
-import Input from '../../components/Input';
+import Image from '@components/Image';
+import Input from '@components/Input';
 import Button from '@material-ui/core/Button';
-
-import GlideCarousel from '../../components/GlideCarousel';
-import GlideSlide from '../../components/GlideCarousel/glideSlide';
+import Heading from '@components/Heading'
+import GlideCarousel from '@components/GlideCarousel';
+import GlideSlide from '@components/GlideCarousel/glideSlide';
 
 import BannerWrapper, {
   Container,

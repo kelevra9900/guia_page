@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from "next/router";
 
-import Image from '../../components/Image';
-import Box from '../../components/Box';
-import Text from '../../components/Text';
-import Heading from '../../components/Heading';
-import Container from '../../components/UI/Container';
+import Image from '@components/Image';
+import Box from '@components/Box';
+import Text from '@components/Text';
+import Heading from '@components/Heading';
+import Container from '@components/UI/Container';
 import CategorySectionWrapper from './category_section.style';
 import { useFetch } from '../../hooks/fetch';
 import { BabelLoading } from 'react-loadingg';
-import FeatureBlock from '../../components/CategoryBlock';
+import FeatureBlock from '@components/CategoryBlock';
 
 interface ICategorySection {
     row?:any,
@@ -66,7 +66,7 @@ const CategorySection = ({
                             width={50}
                             height={50}
                             key={index}
-                            src={require(`../../assets/images/categories/${feature.icono}`)}
+                            src={require(`@assets/images/categories/${feature.icono}`)}
                             // src={<i className={feature.icono} />}
                           />
                         }
