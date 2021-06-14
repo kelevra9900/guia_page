@@ -2,7 +2,9 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { PayPalButton } from 'react-paypal-button-v2';
 
 import { useForm } from "react-hook-form";
-import { InputLabel, TextField, FormControl, Card, CardActionArea, CardMedia, Typography, CardContent, MenuItem, Select } from '@material-ui/core';
+import { InputLabel, TextField, FormControl, Card, CardActionArea, CardMedia, Typography, CardContent, MenuItem } from '@material-ui/core';
+import Select from 'react-select';
+
 import { StarsRounded } from '@material-ui/icons';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -86,6 +88,9 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: '30px', 
       paddingRight: '30px'
     },
+    input: {
+      width: '100%'
+    }
   })
 );
 interface IUser {
@@ -388,16 +393,11 @@ const ProfileContainer = () => {
 
                     <GridItem xs={12} sm={12} md={4}>
                       <Box>
-                        <div style={{ paddingTop: '25px' }}>
-                          <Select
-                            {...register('cobertura_mercado')}
-                            labelId="Cobertura"
-                            id="Cobertura"
-                            >
-                              {coberturaInfo.map((data:any) => { 
-                                <MenuItem value={10}>{data.label}</MenuItem>
-                              })}
-                          </Select>
+                        <div style={{ paddingTop: '32px' }}>
+                          <Select 
+                            options={coberturaInfo}
+                            placeholder="Cobertura"
+                          />
                         </div>
                       </Box>
                     </GridItem>
@@ -405,26 +405,18 @@ const ProfileContainer = () => {
                   <br></br>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={6}>
-                      <Select
-                        {...register('categorias')}
-                        labelId="Categorias"
-                        id="Cobertura"
-                        >
-                          {categorias.map((data:any) => { 
-                            <MenuItem value={10}>{data.label}</MenuItem>
-                          })}
-                      </Select>
+                      <Select 
+                        options={categorias}
+                        placeholder="Categorías"
+
+                      />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={6}>
-                    <Select
-                        {...register('subcategorias')}
-                        labelId="Subcategorias"
-                        id="Cobertura"
-                        >
-                          {subCategories.map((data:any) => { 
-                            <MenuItem value={10}>{data.label}</MenuItem>
-                          })}
-                      </Select>
+                      <Select 
+                        options={subCategories}
+                        placeholder="Subcategorias"
+                        
+                      />
                     </GridItem>
                   </GridContainer>
                   <br></br>
@@ -491,17 +483,6 @@ const ProfileContainer = () => {
             <CardHeader color="primary">
               <p>Edita tu logotipo</p>
             </CardHeader>
-            {/* <Controller
-              control={control}
-              name="logo_empresa"
-              render={({ onChange }) => (
-                <Dropzone
-                  onChangeStatus={(file, status, allFiles) => {
-                    handleControlledDropzonChangeStatus(status, allFiles, onChange);
-                  }}
-                />
-              )}
-            />             */}
             <Dropzone
               getUploadParams={getUploadParams}
               maxFiles={1}
@@ -544,7 +525,7 @@ const ProfileContainer = () => {
               <Fragment>
                 <Fade>
                   <br></br>
-                  <FormControl className={classes.marginBox} variant="outlined">
+                  {/* <FormControl className={classes.marginBox} variant="outlined">
                     <Select
                       defaultValue='Gratis'
                       name="mention"
@@ -554,7 +535,7 @@ const ProfileContainer = () => {
                       <MenuItem value={20}>Twenty</MenuItem>
                       <MenuItem value={30}>Thirty</MenuItem>
                     </Select>
-                    </FormControl>
+                    </FormControl> */}
                   <br></br>
                   <div className={classes.containerDiv}>
                   <br></br>

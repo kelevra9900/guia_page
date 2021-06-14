@@ -237,7 +237,10 @@ function Block (){
           <Grid container item xs={12} spacing={3}>
           {loading ? <BabelLoading /> :  data.length > 0 && data.map((result: any, index: number) => (
               <Card className={classes.card} key={`cards-${index}`}>
-                <CardActionArea>
+                <CardActionArea onClick={() => {
+                  console.log('TAP', result);
+                  router.push(`/empresas/${result.id_usuario}/${encodeURIComponent(result.nombre_empresa)}`);
+                }}>
                   {result.metodo_pago != 'Gratis' && (
                     <div className={classes.recommended}>
                       <StarsRounded style={{color: '#0D386C'}} />
