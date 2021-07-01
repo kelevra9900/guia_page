@@ -1,33 +1,36 @@
 import React from 'react';
-import Document, { Head, Html, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components'
-import { ServerStyleSheets } from '@material-ui/styles';
+import NextDocument, { Head, Html, Main, NextScript } from 'next/document';
 import FavIcon from "@assets/images/favicon.png";
+import {  ServerStyleSheet as StyledComponentSheets } from 'styled-components'
+import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@material-ui/styles';
 
-class MyDocument extends Document {
-  static async getInitialProps (ctx:any) {
-    const styledComponentsSheet = new ServerStyleSheet()
-    const materialSheets = new ServerStyleSheets()
-    const originalRenderPage = ctx.renderPage;
-
+export default class Document extends NextDocument {
+  static async getInitialProps (ctx:any){
+    const styledComponentSheet = new StyledComponentSheets()
+    const materialUiSheets = new MaterialUiServerStyleSheets()
+    const originalRenderPage = ctx.renderPage
     try {
-        ctx.renderPage = () => originalRenderPage({
-            enhanceApp: (App:any) => (props:any) => styledComponentsSheet.collectStyles(materialSheets.collect(<App {...props} />))
-          })
-        const initialProps = await Document.getInitialProps(ctx)
-        return {
-          ...initialProps,
-          styles: (
-            <React.Fragment>
-              {initialProps.styles}
-              {materialSheets.getStyleElement()}
-              {styledComponentsSheet.getStyleElement()}
-            </React.Fragment>
-          )
-        }
-      } finally {
-        styledComponentsSheet.seal()
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App:any) => (props:any) =>
+            styledComponentSheet.collectStyles(
+              materialUiSheets.collect(<App {...props} />),
+            ),
+        })
+      const initialProps = await NextDocument.getInitialProps(ctx)
+      return {
+        ...initialProps,
+        styles: [
+          <React.Fragment key="styles">
+            {initialProps.styles}
+            {materialUiSheets.getStyleElement()}
+            {styledComponentSheet.getStyleElement()}
+          </React.Fragment>,
+        ],
       }
+    } finally {
+      styledComponentSheet.seal()
+    }
   }
 
   render() {
@@ -65,5 +68,3 @@ class MyDocument extends Document {
     );
   }
 }
-
-export default MyDocument;

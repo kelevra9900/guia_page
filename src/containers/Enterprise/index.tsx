@@ -8,7 +8,7 @@ import Text from '@components/Text';
 import Heading from '@components/Heading';
 import Image from '@components/Image';
 import Container from '@components/UI/Container';
-import SugeridosCarousel from '@components/Slider';
+import EmpresasSugeridas from './slider';
 import Reviewer1 from '@assets/images/example-2.jpg';
 
 import {
@@ -43,7 +43,7 @@ interface IRegistro {
   tipo_mencion: number;
 }
 
-const InfoShowcase = ({
+function InfoShowcase({
   sectionWrapper,
   secTitleWrapper,
   secTitle,
@@ -52,24 +52,30 @@ const InfoShowcase = ({
   portfolioDetails,
   titleStyle,
   detailsStyle,
-}: any) => {
+}: any){
   const router = useRouter();
   const [data, setData] = useState<IRegistro>();
+  const { id, categoria } = router.query;
 
-  const { idCategory } = router.query;
+  // console.log('router query--->', router.query)
 
   useEffect(() => {
     axios
-      .get(`https://admin.guiainternacional.com/api/guia/${idCategory}`)
-      .then((res: any) => {
-        console.log('SE OBTIENE RESPUESTA', res.data);
-        setData(res.data.data);
-      })
-      .catch((error) => {
-        console.log('error--->', error);
-        return null;
-      });
+    .get(`https://admin.guiainternacional.com/api/guia/${id}`)
+    .then((res: any) => {
+      setData(res.data.data);
+      loadData();
+    })
+    .catch((error) => {
+      console.log('error--->', error);
+      return null;
+    });
   }, []);
+
+  const loadData = () => {
+
+  }
+
 
   return (
     <Box {...sectionWrapper} as="section" id="portfolio_section">
@@ -121,7 +127,7 @@ const InfoShowcase = ({
                 </MetaItem>
               </EnterpriseMeta>
             </EnterpriseShowcaseItem>
-            {/* <SugeridosCarousel /> */}
+            <EmpresasSugeridas id={categoria} />
           </>
         </EnterpriseShowcaseWrapper>
       </Container>

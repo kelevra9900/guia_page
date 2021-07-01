@@ -8,7 +8,7 @@ import Text from '@components/Text';
 import Heading from '@components/Heading';
 import Container from '@components/UI/Container';
 import CategorySectionWrapper from './category_section.style';
-import { useFetch } from '../../hooks/fetch';
+import { useFetch } from '../../hooks/fetchCategories';
 import { BabelLoading } from 'react-loadingg';
 import FeatureBlock from '@components/CategoryBlock';
 
@@ -36,9 +36,10 @@ const CategorySection = ({
 }: ICategorySection) => {
     const router = useRouter();
     const { loading, response } = useFetch('https://admin.guiainternacional.com/api/categorias');
+    
 
-    const onClickCategory = (e:any, categoryID:number) => {
-      router.push(`/categoria/${categoryID}`);
+    const onClickCategory = (e:any, categoryID:number, nombre: string) => {
+      router.push(`/categoria/${categoryID}/${nombre}`);
     };
     if(loading)
         return(
@@ -59,7 +60,7 @@ const CategorySection = ({
                   {response.data.map((feature:any, index:number) => (
                     <Box className="col" {...col} key={`feature-${index}`}>
                       <FeatureBlock
-                        onClick={(value:any) => onClickCategory(value, feature.id)}
+                        onClick={(value:any) => onClickCategory(value, feature.id, feature.nombre)}
                         icon={
                           <Image
                           alt="logo-icono"

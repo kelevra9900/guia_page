@@ -10,7 +10,7 @@ export const useFetch = (url: string) => {
 
     useEffect(() => {
         axios.get(url).then((res: any) => {
-            const response = res.data.data;
+            const response = res.data;
             setstate({
                 loading: false,
                 error: null,

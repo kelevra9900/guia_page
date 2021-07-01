@@ -1,5 +1,4 @@
 import React, {Fragment} from "react";
-import Link from 'next/link'
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { BabelLoading } from 'react-loadingg';
@@ -9,7 +8,6 @@ import Container from "../UI/Container";
 import SectionWrapper, { CarouselWrapper, SectionHeader }  from "./slider.style";
 import Heading from "../Heading";
 import Text from "../Text";
-import Image from "../Image";
 import GlideSlide from "../GlideCarousel/glideSlide";
 import GlideCarousel from "../GlideCarousel";
 
@@ -20,6 +18,8 @@ const SugeridosCarousel = ({
   const router = useRouter();
 
   const { idCategory } = router.query;
+
+  console.log('router query', router.query);
   
   const { loading, categorias } = useFetch(
     `https://admin.guiainternacional.com/api/categorias/${idCategory}`

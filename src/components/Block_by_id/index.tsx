@@ -18,12 +18,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
 
 import { BabelLoading } from 'react-loadingg';
 
-import { categorias, subCategories } from '../../data/';
+import ByCategorie from '../../models/by_categorie';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -89,10 +87,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Block (){
   const router = useRouter();
-  const { id } = router.query;
-  // if(id === undefined){
-  //   router.push('/');
-  // }
+  const { id, categoria } = router.query;
+
   const [data, setData] = useState<any>([]);
   const [ loading, setLoading ] = useState<boolean>(true);
 
@@ -102,6 +98,8 @@ function Block (){
       .get(`https://admin.guiainternacional.com/api/search/${id}`)
       .then((res: any) => {
         const cat = res.data;
+
+        console.log('Categories', cat)
         setData(cat);
         setLoading(false);
       })
@@ -115,10 +113,6 @@ function Block (){
     Nacional: false,
     Internacional: false,
   });
-
-
-  const [value, setValue] = React.useState('female');
-  const animatedComponents = makeAnimated();
 
   const handleChangeCobertura = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -137,14 +131,11 @@ function Block (){
   //Cobertura petición
 
   const filter = (params:string) => {
-    
-    axios.get(`https://admin.guiainternacional.com/api/search/${id}?cobertura_mercado=${params}`).then((res:any) => {
-      const response = res.data;
-      setData(response);
-      setLoading(false);
-    });
+    let filterData = data.filter((f: ByCategorie) => f.cobertura_mercado === params);
+    setData(filterData);
+    setLoading(false);
   }
-  
+
 
   const { Local, Nacional, Internacional } = state;
 
@@ -154,20 +145,8 @@ function Block (){
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container>
         <Grid item xs={3} sm={3}>
-          <Select
-            options={categorias}
-            closeMenuOnSelect={false}
-            components={animatedComponents}
-            placeholder="Selecciona una categoría"
-            
-            isMulti
-          />
-          <br></br>
-          <Select options={subCategories} placeholder="Subcategoría" />
-          <br></br>
-
           <div>
             <FormControl component="fieldset" className={classes.formControl}>
               <FormLabel component="legend">Cobertura</FormLabel>
@@ -207,39 +186,21 @@ function Block (){
                 />
               </FormGroup>
             </FormControl>
+
+            <Button color="primary" href="/busqueda/s">Busqueda avanzada</Button>
           </div>
-          <br></br>
-          <div>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Ordenar por:</FormLabel>
-              <RadioGroup
-                aria-label="Fecha: más reciente"
-                name="gender1"
-                value={value}
-              >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio style={{color: '#0D386C'}}/>}
-                  label="Fecha: más reciente"
-                />
-                <FormControlLabel
-                  value="male"
-                  control={<Radio style={{color: '#0D386C'}}/>}
-                  label="Fecha: más antiguo"
-                />
-              </RadioGroup>
-            </FormControl>
-          </div>
-        
         </Grid>
 
-        <Grid item xs={9} sm={9} spacing={2}>
+        <Grid item xs={9} sm={9}>
+            <label>Registros por categoría: {categoria}</label>
+            <br></br>
+            <br></br>
           <Grid container item xs={12} spacing={3}>
           {loading ? <BabelLoading /> :  data.length > 0 && data.map((result: any, index: number) => (
               <Card className={classes.card} key={`cards-${index}`}>
                 <CardActionArea onClick={() => {
                   console.log('TAP', result);
-                  router.push(`/empresas/${result.id_usuario}/${encodeURIComponent(result.nombre_empresa)}`);
+                  router.push(`/empresas/${result.id_categoria}/${result.id_registro}/${encodeURIComponent(result.nombre_empresa)}`);
                 }}>
                   {result.metodo_pago != 'Gratis' && (
                     <div className={classes.recommended}>
@@ -275,20 +236,22 @@ function Block (){
                     </Box>
                   </CardContent>
                 </CardActionArea>
+
                 <CardActions>
                   <Button
                     size="small"
                     color="primary"
-                    onClick={(e) => {
+                    onClick={() => {
                       openWeb(result.sitio_web);
                     }}
                   >
-                    Conócenos
+                    Contáctanos
                   </Button>
                 </CardActions>
+
               </Card>
             ),)}
-            
+
           </Grid>
         </Grid>
       </Grid>

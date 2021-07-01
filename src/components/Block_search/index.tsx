@@ -27,6 +27,7 @@ import { BabelLoading } from 'react-loadingg';
 
 import { categorias, subCategories, paises, estados } from '../../data/';
 import axios from 'axios';
+import ByCategorie from 'src/models/by_categorie';
 
 function BlockSearch (){
     const useStyles = makeStyles((theme: Theme) =>
@@ -124,8 +125,8 @@ function BlockSearch (){
     const handleChangeCobertura = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCobertura({ ...state, [event.target.name]: event.target.checked });
         if(event.target.checked){
-          setLoading(true);
-          filter(event.target.name);
+          let filterData = state.filter((f: ByCategorie) => f.cobertura_mercado === event.target.name);
+          setState(filterData);
         }else{
           axios.get(`https://admin.guiainternacional.com/api/busqueda/${busqueda}`).then((res:any) => {
             const response = res.data;
@@ -145,7 +146,7 @@ function BlockSearch (){
 
   // Cambio por país
   const handleSelectChangeCountry = (inputValue:any) => {
-    const filterArray= state.filter((pais:any)=>pais.pais_empresa === inputValue.label);
+    const filterArray= state.filter((pais:ByCategorie)=> pais.pais_empresa === inputValue.label);
     if(filterArray.length > 0){
       setState(filterArray)
     }else{
@@ -184,10 +185,8 @@ function BlockSearch (){
   }
 
   const handleSelectChangeSubcategorie = (inputValue:any) => {
-    console.log('INFO', inputValue)
     if(inputValue.id != null){
       axios.get(`https://admin.guiainternacional.com/api/query/${inputValue.id}`).then((res:any) => {
-        console.log('DATA RESPONSE', res);
         const response = res.data;
         setState(response);
       });
@@ -198,6 +197,10 @@ function BlockSearch (){
       });
     }
   }
+
+  const openWeb = (web: string) => {
+    window.open(`https://${web}`);
+  };
 
 
 
@@ -283,7 +286,10 @@ function BlockSearch (){
           <Grid container item xs={12} spacing={3}>
           {loading ? <BabelLoading /> :  state.length > 0 && state.map((result: any, index: number) => (
               <Card className={classes.card} key={`cards-${index}`}>
-                <CardActionArea>
+                <CardActionArea onClick={() => {
+                  // console.log('TAP', result);
+                  router.push(`/empresas/${result.id_usuario}/${encodeURIComponent(result.nombre_empresa)}`);
+                }}>
                   {result.metodo_pago != 'Gratis' && (
                     <div className={classes.recommended}>
                       <StarsRounded style={{color: '#0D386C'}} />
@@ -323,10 +329,10 @@ function BlockSearch (){
                     size="small"
                     color="primary"
                     onClick={(e) => {
-                    //   openWeb(result.sitio_web);
+                      openWeb(result.sitio_web);
                     }}
                   >
-                    Sitio web
+                    Contáctanos
                   </Button>
                 </CardActions>
               </Card>
